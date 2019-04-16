@@ -1,24 +1,26 @@
 function init() {
     // create a scene, that will hold all our elements such as objects, cameras and lights.
+    // This is an object and it's a container.
     var scene = new THREE.Scene();
 
     // create a camera, which defines where we're looking at.
     var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-    // create a render and set the size
+    // create a render and set the size. This defines how it will render based on the scene and the camera
     var renderer = new THREE.WebGLRenderer();
-    renderer.setClearColor(new THREE.Color(0x000000));
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(new THREE.Color(0x000000)); //Sets the BG to black
+    renderer.setSize(window.innerWidth, window.innerHeight); //Takes up the entire screen
 
     // show axes in the screen
     var axes = new THREE.AxesHelper(20);
     scene.add(axes);
 
-    // create the ground plane
-    var planeGeometry = new THREE.PlaneGeometry(60, 20);
+    // create the ground plane, every object has to start with a Geometry and Material
+    var planeGeometry = new THREE.PlaneGeometry(60, 20); //Width = 60 and Height = 20
     var planeMaterial = new THREE.MeshBasicMaterial({
-        color: 0xAAAAAA
+        color: 0xAAAAAA,
     });
+    //Combine the Geo and Material to create the actual object.
     var plane = new THREE.Mesh(planeGeometry, planeMaterial);
 
     // rotate and position the plane

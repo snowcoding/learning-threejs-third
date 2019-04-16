@@ -9,12 +9,16 @@ function init() {
   var renderer = new THREE.WebGLRenderer();
   renderer.setClearColor(new THREE.Color(0x000000));
   renderer.setSize(window.innerWidth, window.innerHeight);
-  // renderer.shadowMap.enabled = true;
+  renderer.shadowMap.enabled = true;
 
   // createTree(scene);
   // createHouse(scene);
   // createGroundPlane(scene);
   // createBoundingWall(scene);
+
+  // show axes in the screen
+  var axes = new THREE.AxesHelper(20);
+  scene.add(axes);
 
   // create a cube
   var cubeGeometry = new THREE.BoxGeometry(4, 4, 4);
@@ -84,9 +88,15 @@ function init() {
 
   // add the output of the renderer to the html element
   document.getElementById("webgl-output").appendChild(renderer.domElement);
-
+  renderScene();
+  
   // call the render function
   renderer.render(scene, camera);
+
+  function renderScene() {
+    requestAnimationFrame(renderScene);
+    renderer.render(scene, camera)
+  }
 }
 
 function createBoundingWall(scene) {
